@@ -10,8 +10,10 @@ Asenna sovelluksen riippuvuudet komennolla ```poetry install```
 
 Käynnistä sitten sovellus ```poetry run invoke start```
 
-<hr></hr>
+## Dokumentaatio
 
 <a href=https://github.com/kuroniil/ot-harjoitustyo/blob/e4a49e005cf803e3b924151f0fa00241810825b6/dokumentaatio/tuntikirjanpito.md>Tuntikirjanpito</a>
 
 <a href=https://github.com/kuroniil/ot-harjoitustyo/blob/e4a49e005cf803e3b924151f0fa00241810825b6/dokumentaatio/vaatimusmaarittely.md>Vaatimusmäärittely</a>
+
+<a href=https://github.com/kuroniil/ot-harjoitustyo/blob/1c23567a6b6b8d6d9f8a6d95a6c8ffd542645f73/dokumentaatio/changelog.md>Changelog</a>
