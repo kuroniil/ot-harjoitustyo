@@ -6,11 +6,9 @@ Sovellus on Tkinterillä toteutettu 2048 peli, jossa ruudukkoa liikutetaan näpp
 
 ## Käynnistysohjeet
 
-Käynnistä virtuaaliympäristö komennolla ```poetry shell```
+Asenna sovelluksen riippuvuudet komennolla ```poetry install```
 
-Asenna sovelluksen riippuvuudet ```poetry install```
-
-Käynnistä sovellus ```invoke start```
+Käynnistä sitten sovellus ```poetry run invoke start```
 
 <hr></hr>
 
