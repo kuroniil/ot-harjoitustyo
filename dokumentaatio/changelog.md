@@ -13,3 +13,19 @@
 - Aloitettu luokka GameLogic, joka vastaa pelin logiikasta, kuten ruudukon liikkeestä move-metodilla
 - GameLogic ruudukon liike testattu
 - Käyttöliittymä yhdistetty pelilogiikkaan antamalla Game-luokalle GameLogic instanssi
+
+# Viikko 4
+- Pelin ruudukon liike toteutettu puuttuviin suuntiin
+    * Alustava logiikka toteutettu - vaatii vielä refaktorointia
+- Lisätty tulos peliin
+    * Tulos kasvaa yhdistetyn palan määräämällä numerolla
+        * esim. kaksi 4-palaa yhdistetään --> tulos kasvaa 4:llä
+- Lisätty pelin päättymisen logiikka
+    * Tilanteessa, jossa peli on lähellä päättyä, luodaan uusia GameLogic instansseja, jossa "simuloidaan" mitä
+    tapahtuisi (päättyisikö peli) kaikilla eri siirroilla (ylös, alas, vasemmalle oikealle)
+- Lisätty pelin päättymisnäkymän elementit Game luokkaan
+    * Ilmoitusteksti pelin päättymisestä
+    * Tuloksen tallentamislomake
+        * Tuloksen tallentaminen ei vielä toteutettu
+- Uuden pelin aloitus r-näppäimellä
+- Otettu pylint käyttöön

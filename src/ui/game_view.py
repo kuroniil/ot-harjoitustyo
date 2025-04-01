@@ -2,13 +2,17 @@ from tkinter import ttk, Frame, StringVar
 from game_logic import GameLogic
 
 class Game:
-    def __init__(self, root, grid_size, font, handle_menu_click):
+    def __init__(self, root, grid_size, font, handle_menu_click, restart_game):
         self._root = root
         self._grid_size = int(grid_size[0])
         self._font = font
         self._handle_menu_click = handle_menu_click
+        self._restart_game = restart_game
         self._game = GameLogic(self._grid_size)
-        self._grid = self._game.ret_grid()
+        self._grid = self._game.grid.ret_grid()
+        self._curr_score = StringVar(value=f"tulos: 0")
+        self._header_text = StringVar(value=f"Peli ({self._grid_size}x{self._grid_size})")
+        self._game_over_text = StringVar(value="Tallenna tuloksesi nimimerkillä:")
         self._configure_cell_color()
         self._configure_cell_style()
         self._initialize()
@@ -30,8 +34,8 @@ class Game:
 
         header = ttk.Label(
             master=self._frame,
-            text=f"Peli ({self._grid_size}x{self._grid_size})",
-            font=(self._font, 30, "bold"),
+            textvariable=self._header_text,
+            font=(self._font, 40, "bold"),
             background="#02044d",
             foreground="white"
             )
@@ -41,20 +45,42 @@ class Game:
             text="main menu",
             command=self._handle_menu_click
         )
+
+        score_label = ttk.Label(
+            master=self._frame,
+            textvariable=self._curr_score,
+            font=(self._font, 10, "bold"),
+            background="#02044d",
+            foreground="white"
+        )
         
         menu_button.grid(row=2, column=1, columnspan=2)
+        score_label.configure(anchor="center")
+        score_label.grid(row=2, column=4, columnspan=1)
         header.grid(row=0, column=1, columnspan=4)
-        self._root.bind("<Key>", self._handle_keypress) # keycodes: left - 113, up - 111, right - 114, down - 116
+        self._root.bind("<Key>", self._handle_keypress)
         self._initialize_grid()
 
     def _handle_keypress(self, event):
-            if event.keycode == 111:
-                self._game.move_up()
-    
-            self._update_grid()
+        if event.keysym == "Up":
+            self._game.move_up()
+        elif event.keysym == "Right":
+            self._game.move_right()
+        elif event.keysym == "Left":
+            self._game.move_left()
+        elif event.keysym == "Down":
+            self._game.move_down()
+        elif event.keysym == "r":
+            self._restart_game()
+            return
+        else: # ignore other keypresses 
+            return
+        self._update_grid()
+        self._update_score()
+        self._check_game_over()
 
     def _initialize_grid(self):
-        self._grid = self._game.ret_grid()
+        self._grid = self._game.grid.ret_grid()
         for i in range(0, self._grid_size):
             for j in range(0, self._grid_size):
                 setattr(self, f"cell_{i}_{j}_text", StringVar(value=self._grid[i, j]))
@@ -70,31 +96,67 @@ class Game:
         self._update_grid()
 
     def _update_grid(self):
-        self._grid = self._game.ret_grid()
+        self._grid = self._game.grid.ret_grid()
         for i in range(0, len(self._grid)):
             for j in range(0, len(self._grid)):
+                font_color = "white"
                 curr_cell = self._grid[i, j]
                 cell_color = self._cell_colors[curr_cell]
                 if curr_cell <  10:
                     cell_value = f"   {curr_cell}   "
+                    if curr_cell == 0:
+                        font_color = "#a19a89"
                 elif curr_cell < 100:
                     cell_value = f"  {curr_cell}  "
                 elif curr_cell < 1000:
                     cell_value = f" {curr_cell} "
                 else:
                     cell_value = str(curr_cell)
-                getattr(self, f"cell_{i}_{j}").configure(background=cell_color)
+                getattr(self, f"cell_{i}_{j}").configure(background=cell_color, foreground=font_color)
                 getattr(self, f"cell_{i}_{j}_text").set(cell_value)
+
+    def _update_score(self):
+        self._curr_score.set(f"tulos: {str(self._game.ret_score())}")
+
+    def _check_game_over(self):
+        if self._game.ret_game_over():
+            self._game_over_label = ttk.Label(
+                master=self._frame,
+                textvariable=self._game_over_text,
+                font=(self._font, 12, "bold"),
+                background="#02044d",
+                foreground="white"
+            )
+            self._score_entry = ttk.Entry(
+                master=self._frame,
+                text="Tulos",
+                width=15,
+                background="#02044d"
+            )
+            self._score_submit_button = ttk.Button(
+                master=self._frame,
+                text="tallenna",
+            )
+            self._header_text.set(f"Peli ({self._grid_size}x{self._grid_size}) Päättyi")
+            self._game_over_label.grid(row=1, column=1, columnspan=2)
+            self._score_entry.grid(row=1, column=3)
+            self._score_submit_button.grid(row=1, column=4)
 
     def _configure_cell_color(self):
         self._cell_colors = {
             0: "#a19a89",
-            2: "green",
-            4: "yellow",
-            8: "orange",
-            16: "red",
-            32: "purple",
-            2048: "blue"
+            2: "#fff261",
+            4: "#c3ff7a",
+            8: "#83d61e",
+            16: "#3c9157",
+            32: "#60fce0",
+            64: "#0db596",
+            128: "#c2390c",
+            256: "#961e09",
+            512: "#0536a1",
+            1024: "#6900cc",
+            2048: "#6a038c",
+            4096: "#ff0808",
         }
 
     def _configure_cell_style(self):
@@ -102,5 +164,4 @@ class Game:
         self._style.configure(
             "Game.TLabel",
             font=(self._font, 40),
-            foreground="white"
             )

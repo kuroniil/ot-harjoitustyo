@@ -13,9 +13,9 @@ class TestGame(unittest.TestCase):
                                  [0,0,0,2],
                                  [0,0,2,0]], dtype=int)
         
-        equal_values = self.game._grid == correct_grid
+        equal_values = self.game.grid.ret_grid() == correct_grid
         self.assertTrue(equal_values.all())
-        self.assertEqual(self.game._grid.shape, correct_grid.shape)
+        self.assertEqual(self.game.grid.ret_grid().shape, correct_grid.shape)
 
     def test_game_move_up_works_correctly(self):
         self.game.move_up()
@@ -25,5 +25,5 @@ class TestGame(unittest.TestCase):
                                  [0,0,0,0],
                                  [0,0,0,0]], dtype=int)
         
-        equal_values = self.game.ret_grid() == correct_grid
+        equal_values = self.game.grid.ret_grid() == correct_grid
         self.assertTrue(equal_values.all())

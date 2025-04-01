@@ -31,7 +31,8 @@ class UI:
                     self._root,
                     "4x4", 
                     self._font, 
-                    self._handle_menu_click
+                    self._handle_menu_click,
+                    self._handle_4x4_click
                     )
         self._curr_view.pack()
         

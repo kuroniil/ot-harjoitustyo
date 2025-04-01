@@ -14,15 +14,15 @@ Päävalikosta käyttäjä pystyy valita pelin eri kokoisilla ruudukoilla tai tu
 
 ## Sovelluksen toiminnallisuus
 
-- Käyttäjä pystyy valitsemaan päävalikosta pelin eri kokoisilla ruudukoilla
-    * Käyttäjä pystyy pelata nuolinäppäimillä
-    * Pelissä pisteet määräytyy yhdistettyjen palikoiden perusteella
-    * Tulos tallentuu pelin päätyttyä yhdistettynä ruudukon kokoon
-- Käyttäjä pystyy tarkastelemaan aikaisempia pelien tuloksiaan tulokset sivulla
-    * Ryhmitelty eri ruudukon kokojen perusteella
-    * Lajiteltu parhaan tuloksen mukaan
-    * Tuloksessa mukana nimimerkki
-- Pelin päätyttyä käyttäjä voi valita pelata uudestaan, tarkastella tuloksia tai mennä päävalikkoon
+- [ ] Käyttäjä pystyy valitsemaan päävalikosta pelin eri kokoisilla ruudukoilla
+    * [x] Käyttäjä pystyy pelata nuolinäppäimillä
+    * [x] Pelissä pisteet määräytyy yhdistettyjen palikoiden perusteella
+    * [ ] Tulos tallentuu pelin päätyttyä yhdistettynä ruudukon kokoon
+- [ ] Käyttäjä pystyy tarkastelemaan aikaisempia pelien tuloksiaan tulokset sivulla
+    * [ ] Ryhmitelty eri ruudukon kokojen perusteella
+    * [ ] Lajiteltu parhaan tuloksen mukaan
+    * [ ] Tuloksessa mukana nimimerkki
+- [ ] Pelin päätyttyä käyttäjä voi valita pelata uudestaan tai mennä päävalikkoon
 
 ## Jatkokehitysideoita 
 
