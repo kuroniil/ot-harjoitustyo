@@ -1,5 +1,6 @@
 [tool.poetry]
 name = "ot-harjoitustyo"
+packages = [{include='src'}]
 version = "0.1.0"
 description = ""
 authors = ["Niilo Kuronen <niilo.kuronen@helsinki.fi>"]
