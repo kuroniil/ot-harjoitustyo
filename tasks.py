@@ -22,4 +22,5 @@ def lint(ctx):
 
 @task
 def db_init(ctx):
+	ctx.run("mkdir data -p", pty=True)
 	ctx.run("python3 src/initialize_database.py", pty=True)
