@@ -32,7 +32,7 @@ class Leaderboard:
         self._frame.grid_rowconfigure(7, weight=1, minsize=100)
         self._frame.grid_rowconfigure(8, weight=1, minsize=50)
 
-        self._header_text = StringVar(value="Tulokset {self._mode}x{self._mode}")
+        self._header_text = StringVar(value=f"Tulokset {self._mode}x{self._mode}")
         header = ttk.Label(
             master=self._frame,
             textvariable=self._header_text,
