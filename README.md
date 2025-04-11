@@ -24,6 +24,10 @@ Coverage-testikattavuusraportin saa generoitua komennolla ```poetry run invoke c
 
 Pylint-tarkastukset koodille saa suoritettua komennolla ```poetry run invoke lint```
 
+## Release
+
+<a href=https://github.com/kuroniil/ot-harjoitustyo/releases/tag/viikko5>Sovelluksen uusin versio</a>
+
 ## Dokumentaatio
 
 <a href=https://github.com/kuroniil/ot-harjoitustyo/blob/e4a49e005cf803e3b924151f0fa00241810825b6/dokumentaatio/tuntikirjanpito.md>Tuntikirjanpito</a>
