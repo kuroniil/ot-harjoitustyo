@@ -16,17 +16,18 @@ Päävalikosta käyttäjä pystyy valita pelin eri kokoisilla ruudukoilla tai tu
 
 - [ ] Käyttäjä pystyy valitsemaan päävalikosta pelin eri kokoisilla ruudukoilla
     * [x] Käyttäjä pystyy pelata nuolinäppäimillä
+    * [ ] Eri ruudukon kokoja
     * [x] Pelissä pisteet määräytyy yhdistettyjen palikoiden perusteella
-    * [ ] Tulos tallentuu pelin päätyttyä yhdistettynä ruudukon kokoon
-- [ ] Käyttäjä pystyy tarkastelemaan aikaisempia pelien tuloksiaan tulokset sivulla
-    * [ ] Ryhmitelty eri ruudukon kokojen perusteella
-    * [ ] Lajiteltu parhaan tuloksen mukaan
-    * [ ] Tuloksessa mukana nimimerkki
-- [ ] Pelin päätyttyä käyttäjä voi valita pelata uudestaan tai mennä päävalikkoon
+    * [x] Tulos tallentuu pelin päätyttyä yhdistettynä ruudukon kokoon
+- [x] Käyttäjä pystyy tarkastelemaan aikaisempia pelien tuloksiaan tulokset sivulla
+    * [x] Ryhmitelty eri ruudukon kokojen perusteella
+    * [x] Lajiteltu parhaan tuloksen mukaan
+    * [x] Tuloksessa mukana nimimerkki
+- [x] Pelin päätyttyä käyttäjä voi valita pelata uudestaan tai mennä päävalikkoon
 
 ## Jatkokehitysideoita 
 
-- Lisää eri ruudukon kokoja
 - Pelin ulkoasun personointi (ruudukon väri yms.)
+- Pelin voi tallentaa ja jatkaa myöhemmin
 - Julkisessa internetissä oleva api tarjoaa tulokset, jotka sovellus hakee ja näyttää käynnistäessä paikallisesti
     * Tulokset myös talletettaisiin verkon yli ja käyttäjät näkisivät muiden käyttäjien jakamat tulokset

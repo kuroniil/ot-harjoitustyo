@@ -1,18 +1,21 @@
 from tkinter import ttk, Frame, StringVar
 from game_logic import GameLogic
+from scores import Scores
 
 class Game:
     def __init__(self, root, grid_size, font, handle_menu_click, restart_game):
         self._root = root
         self._grid_size = int(grid_size[0])
         self._font = font
-        self._handle_menu_click = handle_menu_click
+        self._menu_click = handle_menu_click
         self._restart_game = restart_game
+        self._score_submitted = False
         self._game = GameLogic(self._grid_size)
         self._grid = self._game.grid.ret_grid()
         self._curr_score = StringVar(value=f"tulos: 0")
         self._header_text = StringVar(value=f"Peli ({self._grid_size}x{self._grid_size})")
         self._game_over_text = StringVar(value="Tallenna tuloksesi nimimerkillä:")
+        self._scores = Scores(self._grid_size)
         self._configure_cell_color()
         self._configure_cell_style()
         self._initialize()
@@ -70,7 +73,7 @@ class Game:
             self._game.move_left()
         elif event.keysym == "Down":
             self._game.move_down()
-        elif event.keysym == "r":
+        elif event.keysym == "Escape":
             self._restart_game()
             return
         else: # ignore other keypresses 
@@ -78,6 +81,10 @@ class Game:
         self._update_grid()
         self._update_score()
         self._check_game_over()
+
+    def _handle_menu_click(self):
+        self._root.unbind("<Key>")
+        self._menu_click()
 
     def _initialize_grid(self):
         self._grid = self._game.grid.ret_grid()
@@ -136,11 +143,21 @@ class Game:
             self._score_submit_button = ttk.Button(
                 master=self._frame,
                 text="tallenna",
+                command=self._handle_entry_submit
             )
             self._header_text.set(f"Peli ({self._grid_size}x{self._grid_size}) Päättyi")
             self._game_over_label.grid(row=1, column=1, columnspan=2)
             self._score_entry.grid(row=1, column=3)
             self._score_submit_button.grid(row=1, column=4)
+
+    def _handle_entry_submit(self):
+        name = self._score_entry.get()
+        if not self._score_submitted:
+            if self._scores.add_new_score(name, self._game._score, self._grid_size):
+                self._score_submitted = True
+                self._game_over_text.set("Tallennettu! Uusi peli -> Esc")
+            else:
+                self._game_over_text.set("Virhe tuloksen tallennuksessa")
 
     def _configure_cell_color(self):
         self._cell_colors = {

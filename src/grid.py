@@ -38,56 +38,7 @@ class Grid():
     def move(self, direction, collisions_checked=False):
         if not collisions_checked:
             self._grid_before_move = self._grid.copy()
-        match direction:
-            case "up":
-                for i in range(self._size):
-                    updated_column = list(self._grid[:, i])
-                    j = 0
-                    swaps = self._size - 1
-                    while j < (len(updated_column)):
-                        if updated_column[j] == 0 and swaps > 0:
-                            updated_column.append(updated_column.pop(j))
-                            j -= 1
-                            swaps -= 1
-                        j += 1
-                    self._grid[:, i] = updated_column
-            case "right":
-                for i in range(self._size):
-                    updated_row = list(self._grid[i, :])
-                    j = self._size - 1
-                    swaps = self._size - 1
-                    while j > 0:
-                        if updated_row[j] == 0 and swaps > 0:
-                            updated_row.insert(0, updated_row.pop(j))
-                            j += 1
-                            swaps -= 1
-                        j -= 1
-                    self._grid[i, :] = updated_row
-            case "left":
-                for i in range(self._size):
-                    updated_row = list(self._grid[i, :])
-                    j = 0
-                    swaps = self._size - 1
-                    while j < (len(updated_row)):
-                        if updated_row[j] == 0 and swaps > 0:
-                            updated_row.append(updated_row.pop(j))
-                            j -= 1
-                            swaps -= 1
-                        j += 1
-                    self._grid[i, :] = updated_row
-            case "down":
-                for i in range(self._size):
-                    updated_column = list(self._grid[:, i])
-                    j = self._size - 1
-                    swaps = self._size - 1
-                    while j > 0:
-                        if updated_column[j] == 0 and swaps > 0:
-                            updated_column.insert(0, updated_column.pop(j))
-                            j += 1
-                            swaps -= 1
-                        j -= 1
-                    self._grid[:, i] = updated_column
-
+        self._move_zeros(direction)
         if not collisions_checked:
             self._collisions(direction)
         else:
@@ -101,55 +52,81 @@ class Grid():
             elif len(self.find_all_zeros()) == 0 and self._game.simulate:
                 self._game.game_over = True
 
+    def _move_zeros(self, direction):
+        if direction in set(("up", "left")):
+            for i in range(self._size):
+                updated = list(self._grid[:, i]) if direction == "up" else list(self._grid[i, :])
+                self._move_zeros_right(updated, direction, i)
+
+        elif direction in set(("down", "right")):
+            for i in range(self._size):
+                updated = list(self._grid[i, :]) if direction == "right" else list(self._grid[:, i])
+                self._move_zeros_left(updated, direction, i)
+
+    def _move_zeros_right(self, updated, direction, i):
+        j = 0
+        swaps = self._size - 1
+        while j < (len(updated)):
+            if updated[j] == 0 and swaps > 0:
+                updated.append(updated.pop(j))
+                j -= 1
+                swaps -= 1
+            j += 1
+            if direction == "up":
+                self._grid[:, i] = updated
+            else:
+                self._grid[i, :] = updated
+
+    def _move_zeros_left(self, updated, direction, i):
+        j = self._size - 1
+        swaps = self._size - 1
+        while j > 0:
+            if updated[j] == 0 and swaps > 0:
+                updated.insert(0, updated.pop(j))
+                j += 1
+                swaps -= 1
+            j -= 1
+        if direction == "down":
+            self._grid[:, i] = updated
+        else:
+            self._grid[i, :] = updated
+
     def _collisions(self, direction):
-        match direction:
-            case "up":
-                for i in range(self._size):
-                    updated_column = list(self._grid[:, i])
-                    j = 0
-                    while j < (len(updated_column) - 1):
-                        if updated_column[j] == updated_column[j + 1]:
-                            self._game._score += updated_column[j]
-                            updated_column[j] *= 2
-                            updated_column[j + 1] = 0
-                            j += 1
-                        j += 1
-                    self._grid[:, i] = updated_column
-            case "right":
-                for i in range(self._size):
-                    updated_row = list(self._grid[i, :])
-                    j = len(updated_row) - 1
-                    while j > 0:
-                        if updated_row[j] == updated_row[j - 1]:
-                            self._game._score += updated_row[j]
-                            updated_row[j] *= 2
-                            updated_row[j - 1] = 0
-                            j -= 1
-                        j -= 1
-                    self._grid[i, :] = updated_row
-            case "left":
-                for i in range(self._size):
-                    updated_row = list(self._grid[i, :])
-                    j = 0
-                    while j < len(updated_row) - 1:
-                        if updated_row[j] == updated_row[j + 1]:
-                            self._game._score += updated_row[j]
-                            updated_row[j] *= 2
-                            updated_row[j + 1] = 0
-                            j += 1
-                        j += 1
-                    self._grid[i, :] = updated_row
-            case "down":
-                for i in range(self._size):
-                    updated_column = list(self._grid[:, i])
-                    j = len(updated_column) - 1
-                    while j > 0:
-                        if updated_column[j] == updated_column[j - 1]:
-                            self._game._score += updated_column[j]
-                            updated_column[j] *= 2
-                            updated_column[j - 1] = 0
-                            j -= 1
-                        j -= 1
-                    self._grid[:, i] = updated_column
+        if direction in set(("up", "left")):
+            for i in range(self._size):
+                updated = list(self._grid[:, i]) if direction == "up" else list(self._grid[i, :])
+                self._left_collisions(updated, direction, i)
+        elif direction in set(("down", "right")):
+            for i in range(self._size):
+                updated = list(self._grid[i, :]) if direction == "right" else list(self._grid[:, i])
+                self._right_collisions(updated, direction, i)
 
         self.move(direction, True)
+
+    def _left_collisions(self, updated, direction, i):
+        j = 0
+        while j < (len(updated) - 1):
+            if updated[j] == updated[j + 1]:
+                self._game._score += updated[j]
+                updated[j] *= 2
+                updated[j + 1] = 0
+                j += 1
+            j += 1
+            if direction == "up":
+                self._grid[:, i] = updated
+            else:
+                self._grid[i, :] = updated
+
+    def _right_collisions(self, updated, direction, i):
+        j = len(updated) - 1
+        while j > 0:
+            if updated[j] == updated[j - 1]:
+                self._game._score += updated[j]
+                updated[j] *= 2
+                updated[j - 1] = 0
+                j -= 1
+            j -= 1
+        if direction == "down":
+            self._grid[:, i] = updated
+        else:
+            self._grid[i, :] = updated

@@ -11,4 +11,6 @@
 | 28.3 | 4    | Pelin päätyymisen logiikka, tulos peliin, pelin päätösnäkymä |
 | 31.3 | 3    | Dokumentaation päivitys ja pylint |
 | 1.4 | 3    | Pelin ruudukon refaktorointi omaksi komponentikseen ja ominaisuus aloittaa uusi peli |
-| Yht.   | 27   | | 
+| 8.4 | 4    | Tietokantaan yhdistäminen ja sen alustus, pelin tuloksen tallennus tietokantaan |
+| 9.4 | 4    | Tulokset ruutu ja tuloksien tallentamisominaisuuden kehitystä |
+| Yht.   | 35   | | 

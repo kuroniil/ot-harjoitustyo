@@ -29,3 +29,19 @@
         * Tuloksen tallentaminen ei vielä toteutettu
 - Uuden pelin aloitus r-näppäimellä
 - Otettu pylint käyttöön
+
+# Viikko 5
+- Lisätty pelin tuloksen tallennus tietokantaan
+    * Käyttäjä saa tiedon lisäyksen onnistumisesta
+    * Saman tuloksen voi lisätä vain kerran
+      * Tämän jälkeen tulee aloittaa uusi peli tai palata päävalikkoon
+- Lisätty näkymä, jossa vanhoja tallennettuja tuloksia voi tarkastella
+    * Käyttäjä voi valita minkä pelimuodon tuloksia tarkastelee
+    * Yhdellä sivulla näkyy taulu viidestä tuloksesta kerrallaan ja seuraaviin pääsee aina napilla
+    * Järjestetty tuloksen mukaan
+- Lisätty moduuli tietokantaan yhdistämistä varten, sekä tietokannan alustamisskripti
+- Lisätty luokat, joiden avulla edellä kuvatut ominaisuudet toteutetaan
+    * Leaderboard - näkymä tuloksille
+    * Scores ja Score - Score on olio tietokannan scores taululle. Scores käsittelee Score-olioita, järjestää niitä yms.
+- Refaktoroitu Grid luokan ruudukon liikkumista ja törmäyksiä
+- Lisätty testejä Grid luokan ruudukon liikkumiselle

@@ -1,5 +1,6 @@
 from ui.main_menu_view import MainMenu
 from ui.game_view import Game
+from ui.leaderboard_view import Leaderboard
 
 class UI:
     def __init__(self, root):
@@ -34,6 +35,12 @@ class UI:
                     self._handle_menu_click,
                     self._handle_4x4_click
                     )
+            case "leaderboard":
+                self._curr_view = Leaderboard(
+                    self._root,
+                    self._handle_menu_click,
+                    self._font
+                )
         self._curr_view.pack()
         
     def _handle_menu_click(self):
@@ -43,7 +50,8 @@ class UI:
         self._show_view("4x4_game")
         
     def _handle_5x5_click(self):
-        self._show_view("5x5_game")
+        pass
+        #self._show_view("5x5_game")
 
     def _handle_leaderboard_click(self):
         self._show_view("leaderboard")
