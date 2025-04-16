@@ -12,7 +12,7 @@ except FileNotFoundError:
 db_env = os.getenv("APP_ENV") or "development"
 
 connection = sqlite3.connect(os.path.join(dirname, "..", "data", \
-                                "scores.sqlite" if db_env == "development" \
+                                "game.sqlite" if db_env == "development" \
                                 else "tests.sqlite"))
 
 def get_database_connection():

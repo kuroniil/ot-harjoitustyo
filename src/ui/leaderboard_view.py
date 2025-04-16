@@ -2,6 +2,7 @@ from tkinter import ttk, Frame, StringVar
 from scores import Scores
 
 class Leaderboard:
+    """Class for leaderboard view of the user interface"""
     def __init__(self, root, handle_menu_click, font):
         self._mode = 4
         self._scores = Scores(self._mode)

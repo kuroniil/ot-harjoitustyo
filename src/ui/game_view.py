@@ -3,16 +3,17 @@ from game_logic import GameLogic
 from scores import Scores
 
 class Game:
-    def __init__(self, root, grid_size, font, handle_menu_click, restart_game):
+    """Class for the game view of the user interface"""
+    def __init__(self, root, grid_size, font, handle_menu_click, restart_game, start_grid=[], score=0):
         self._root = root
         self._grid_size = int(grid_size[0])
         self._font = font
         self._menu_click = handle_menu_click
         self._restart_game = restart_game
         self._score_submitted = False
-        self._game = GameLogic(self._grid_size)
+        self._game = GameLogic(self._grid_size, start_grid, score) if len(start_grid) != 0 else GameLogic(self._grid_size)
         self._grid = self._game.grid.ret_grid()
-        self._curr_score = StringVar(value=f"tulos: 0")
+        self._curr_score = StringVar(value=f"tulos: {score}")
         self._header_text = StringVar(value=f"Peli ({self._grid_size}x{self._grid_size})")
         self._game_over_text = StringVar(value="Tallenna tuloksesi nimimerkillä:")
         self._scores = Scores(self._grid_size)
@@ -35,6 +36,10 @@ class Game:
         [self._frame.grid_rowconfigure(i, weight=1, minsize=100) for i in range(0, 7)]
         self._frame.grid_rowconfigure(7, weight=1, minsize=50)
 
+        if self._grid_size == 5:
+            self._frame.grid_columnconfigure(6, weight=1, minsize=100)
+            self._frame.grid_rowconfigure(8, weight=1, minsize=50)
+
         header = ttk.Label(
             master=self._frame,
             textvariable=self._header_text,
@@ -56,11 +61,18 @@ class Game:
             background="#02044d",
             foreground="white"
         )
+
+        save_game_button = ttk.Button(
+            master=self._frame,
+            text="tallenna peli",
+            command=self._save_game
+        )
         
         menu_button.grid(row=2, column=1, columnspan=2)
+        save_game_button.grid(row=2, column=3)
         score_label.configure(anchor="center")
-        score_label.grid(row=2, column=4, columnspan=1)
-        header.grid(row=0, column=1, columnspan=4)
+        score_label.grid(row=2, column=4 if self._grid_size == 4 else 5, columnspan=1)
+        header.grid(row=0, column=1, columnspan=4 if self._grid_size == 4 else 5)
         self._root.bind("<Key>", self._handle_keypress)
         self._initialize_grid()
 
@@ -101,6 +113,9 @@ class Game:
                 getattr(self, f"cell_{i}_{j}").grid(row=i+3, column=j+1, ipady=25, padx=5, pady=5)
         
         self._update_grid()
+
+    def _save_game(self):
+        self._game.save()
 
     def _update_grid(self):
         self._grid = self._game.grid.ret_grid()

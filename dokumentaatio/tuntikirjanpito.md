@@ -13,4 +13,6 @@
 | 1.4 | 3    | Pelin ruudukon refaktorointi omaksi komponentikseen ja ominaisuus aloittaa uusi peli |
 | 8.4 | 4    | Tietokantaan yhdistäminen ja sen alustus, pelin tuloksen tallennus tietokantaan |
 | 9.4 | 4    | Tulokset ruutu ja tuloksien tallentamisominaisuuden kehitystä |
-| Yht.   | 35   | | 
+| 15.4 | 4    | 5x5 pelimuoto ja pelien tallennusominaisuus |
+| 16.4 | 3    | Dokumentaation päivistys: arkkitehtuuri, changelog, käyttöohje, docstring |
+| Yht.   | 42   | | 

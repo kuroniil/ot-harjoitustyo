@@ -1,8 +1,40 @@
-# Arkkitehtuuri
+# Arkkitehtuurikuvaus
 
-## Tulokset-näkymä
+## Rakenne
 
-Alla oleva sekvenssikaavio kuvaa kuinka käyttäjän napin painalluksesta tallennetut tulokset päätyvät tietokannasta käyttäjälle.
+Sovelluksen rakenne koostuu käyttöliittymää, sovelluslogiikaa ja tietokantaoperaatioita toteuttavista komponenteista. 
+
+
+## Sovelluslogiikka
+
+Pelin sovelluslogiikan toteuttamisesta vastaavat luokka GameLogic ja pelin ruudukon luokka Grid. 
+
+Alla oleva luokkakaavio kuvaa näitä kahta luokkaa.
+
+```mermaid
+    classDiagram
+    GameLogic "1" -- "1" Grid
+    class GameLogic {
+        grid
+        score
+        game_over
+    }
+    class Grid {
+        size
+        .move
+        .collisions
+        .find_all_zeros
+    }
+```
+
+
+## Käyttöliittymä
+
+Sovelluksen käyttöliittymän toteuttavat luokka UI ja eri näkymistä vastaavat luokat Game, MainMenu, Leaderboard ja  LoadGame. Luokka UI on vastuussa eri näkymien hallinnoinnista. 
+
+### Tulokset-näkymä
+
+Alla oleva sekvenssikaavio kuvaa kuinka käyttäjän napin painalluksesta tallennetut tulokset päätyvät tietokannasta käyttäjälle
 
 ```mermaid
     sequenceDiagram
@@ -23,22 +55,8 @@ Alla oleva sekvenssikaavio kuvaa kuinka käyttäjän napin painalluksesta tallen
     Scores->>Leaderboard: complete_scores
 ```
 
-## Luokkakaavio
+Luokka UI siis vaihtaa näkymän Leaderboard luokan toteuttamaan näkymään. Leaderboard sitten käyttää tietokantaoperaatioita toteuttavaa Scores luokkaa apunaan hakemaan tulokset näkymään.
 
-Luokkakaavio kuvaa sovelluksen kahden keskeisen luokan yhteyttä.
+## Tietokantaoperaatioita toteuttavat luokat
 
-```mermaid
-    classDiagram
-    GameLogic "1" -- "1" Grid
-    class GameLogic {
-        grid
-        score
-        game_over
-    }
-    class Grid {
-        size
-        .move
-        .collisions
-        .find_all_zeros
-    }
-```
+Sovelluksessa pelien ja tulosten tallennusta toteuttavat luokat Games ja Game, sekä Scores ja Score. Game ja Score ovat yksittäisiä tietokantaolioita, joita käyttöliittymän ja sovelluslogiikan on helppo käsitellä. Luokat Games ja Scores mahdollistavat näiden olioiden hakemista tietokannasta.

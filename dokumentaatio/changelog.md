@@ -45,3 +45,18 @@
     * Scores ja Score - Score on olio tietokannan scores taululle. Scores käsittelee Score-olioita, järjestää niitä yms.
 - Refaktoroitu Grid luokan ruudukon liikkumista ja törmäyksiä
 - Lisätty testejä Grid luokan ruudukon liikkumiselle
+
+# Viikko 6
+- Lisätty pelin tallennus tietokantaan
+    * Käyttäjä voi jatkaa peliä tallennetusta kohdasta
+    * Pelin ruudukko, tulos ja päivämäärä tallennetaan
+- Lisätty näkymä, josta tallennetuja pelejä voi tarkastella ja jatkaa
+    * Listattu päivämäärän ja tuloksen mukaan
+    * Lajiteltu id:n mukaan, jotta uusin näkyy ensimmäisenä
+    * Käyttäjä pystyy jatkaa tallennettua peliä klikkaamalla peliä
+- Lisätty 5x5 ruudukon pelimuoto
+    * Kaikki ominaisuudet toimii molemmilla pelimuodoilla
+- Lisätty testejä
+    * Tuloksen tallentaminen tietokantaan
+      * Käytössä erillinen testitietokanta, kun testit ajetaan invoken kautta tai APP_ENV ympäristömuuttuja asetetaan manuaalisesti 
+    * Tallennetun pelin jatkaminen pelilogiikan osalta

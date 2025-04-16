@@ -57,3 +57,18 @@ class TestGame(unittest.TestCase):
                                  [2,0,0,0]], dtype=int)
         equal_values = self.game.grid.ret_grid() == correct_grid
         self.assertTrue(equal_values.all())
+
+    def test_starting_with_saved_grid_works(self):
+        start_grid = np.array([[0,   0,    0,  0],
+                               [0,   4,    4,  8],
+                               [2,   256,  16, 0],
+                               [512, 1024, 32, 4]], dtype=int)
+
+        correct_grid = np.array([[0,   0,    0,  0],
+                                 [0,   4,    4,  4],
+                                 [2,   256,  16, 8],
+                                 [512, 1024, 32, 4]], dtype=int)
+        game = GameLogic(4, start_grid, 0)
+        game.move_down()
+        equal_values = game.grid.ret_grid() == correct_grid
+        self.assertTrue(equal_values.all())

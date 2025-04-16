@@ -1,7 +1,11 @@
 import numpy as np
 
 class Grid():
-    def __init__(self, game, size, start_grid):
+    """Class for handling the grid of the game and its
+       operations. Takes as parameters the game that the
+       grid is a part of, the size of the grid and optional
+       starting point start_grid"""
+    def __init__(self, game, size, start_grid=[]):
         self._game = game
         if len(start_grid) == 0:
             self._grid = np.zeros((size, size), dtype=int)
@@ -12,11 +16,9 @@ class Grid():
         self._size = size
 
     def add_piece(self):
-        """
-        Add a piece to the grid. The piece will be
+        """Add a piece to the grid. The piece will be
         a 2 or a 4 with 2 being more likely with a 
-        probability of 0.9.
-        """
+        probability of 0.9"""
         indices_of_zeros = self.find_all_zeros()
         random_location = indices_of_zeros[np.random.choice(len(indices_of_zeros))]
         if np.random.uniform() < 0.9:
@@ -35,19 +37,28 @@ class Grid():
         """Returns the grid"""
         return self._grid
 
+    def save_grid(self):
+        """Forms the grid into a string
+           that can be saved in the database"""
+        return str(self._grid)
+
     def move(self, direction, collisions_checked=False):
+        """Method for moving the grid into a direction.
+           Along with the other internal methods, all
+           zeros are moved in a direction, after which
+           the collisions are checked. Next all zeros 
+           are moved again and a new piece is added to
+           the grid"""
         if not collisions_checked:
             self._grid_before_move = self._grid.copy()
         self._move_zeros(direction)
         if not collisions_checked:
             self._collisions(direction)
         else:
-            # Don't even try to add piece if the move doesn't change the grid
             grid_changed = self._grid != self._grid_before_move
             if grid_changed.any():
                 self.add_piece()
             elif len(self.find_all_zeros()) == 0 and not self._game.simulate:
-                # Simulate if the game is actually over
                 self._game.simulate_game_over()
             elif len(self.find_all_zeros()) == 0 and self._game.simulate:
                 self._game.game_over = True
