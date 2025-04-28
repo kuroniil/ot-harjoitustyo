@@ -172,7 +172,7 @@ class Game:
                 self._scores.add_new_score(name, self._game._score, self._grid_size)
                 self._score_submitted = True
                 self._game_over_text.set("Tallennettu! Uusi peli -> Esc")
-            except:
+            except ValueError:
                 self._game_over_text.set("Nimen täytyy olla 1-20 merkkiä.")
 
     def _configure_cell_color(self):
@@ -190,6 +190,11 @@ class Game:
             1024: "#6900cc",
             2048: "#6a038c",
             4096: "#ff0808",
+            8192: "#8f0056",
+            16384: "#f235d9",
+            32768: "#0a0a0a",
+            65536: "#453a45",
+            131072: "#a187a1",
         }
 
     def _configure_cell_style(self):
