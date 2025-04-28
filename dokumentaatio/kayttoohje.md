@@ -1,5 +1,28 @@
 # Käyttöohje
 
+Aloita lataamalla ja purkamalla sovelluksen lähdekoodi <a href=https://github.com/kuroniil/ot-harjoitustyo/releases>täältä</a> tai kloonaamalla repositorio.
+
+## Käynnistysohjeet
+
+Asenna sovelluksen riippuvuudet komennolla 
+
+```bash
+poetry install
+```
+
+Ensimmäisellä kerralla käynnistäessä tietokanta tulee alustaa. Sen voi tehdä komennolla
+
+```bash
+poetry run invoke db-init
+```
+
+Nyt voit käynnistää sovelluksen komennolla
+
+```bash
+poetry run invoke start
+```
+
+
 ## Päävalikko
 
 Päävalikko on hyvin yksinkertainen ja sisältää neljä nappia. Napit "4x4" ja "5x5" aloittavat uuden pelin käyttäen kyseisiä ruudukon kokoja. Nappi "Lataa peli" vie näkymään, josta tallennetua peliä voi jatkaa. Nappi "Tulokset" vie näkymään, josta vanhoja tallennettuja tuloksia voidaan tarkastella. Jokaisesta näkymästä löytyy nappi "main menu", joka vie takaisin päävalikkoon.
