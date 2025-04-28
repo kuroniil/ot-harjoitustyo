@@ -1,16 +1,14 @@
 # Vaatimusmäärittely
 
-## Yleistä
-
 Sovelluksessa käyttäjä pystyy pelaamaan 2048 peliä ja pitämään kirjaa parhaista tuloksistaan. Peliä pystyy pelaamaan eri kokoisilla ruudukoilla.
 
 ## Käyttöliittymäluonnos
 
-Sovellus koostuu kolmesta eri päänäkymästä; päävalikko, peli ja tulokset.
+Sovellus koostuu neljästä eri päänäkymästä; päävalikko, peli, tulokset ja pelin latausnäkymä.
 
 ![alt text](kuvat/image.png)
 
-Päävalikosta käyttäjä pystyy valita pelin eri kokoisilla ruudukoilla tai tulokset näkymän. Pelin päätyttyä pelinäkymään tulee ilmoitus pelin päättymisestä ja valikko vaihtoehdoista (päävalikkoon, uusi peli, tulokset).
+Päävalikosta käyttäjä pystyy valita pelin eri kokoisilla ruudukoilla, tulokset näkymän tai pelin latausnäkymän. Pelin päätyttyä pelinäkymään tulee ilmoitus pelin päättymisestä ja tuloksen tallennusmahdollisuudesta.
 
 ## Sovelluksen toiminnallisuus
 
@@ -18,7 +16,7 @@ Päävalikosta käyttäjä pystyy valita pelin eri kokoisilla ruudukoilla tai tu
     * [x] Käyttäjä pystyy pelata nuolinäppäimillä
     * [x] Eri ruudukon kokoja
     * [x] Pelissä pisteet määräytyy yhdistettyjen palikoiden perusteella
-    * [x] Tulos tallentuu pelin päätyttyä yhdistettynä ruudukon kokoon
+    * [x] Tuloksen voi tallentaa pelin päätyttyä yhdistettynä ruudukon kokoon
 - [x] Käyttäjä pystyy tarkastelemaan aikaisempia pelien tuloksiaan tulokset sivulla
     * [x] Ryhmitelty eri ruudukon kokojen perusteella
     * [x] Lajiteltu parhaan tuloksen mukaan
@@ -29,5 +27,3 @@ Päävalikosta käyttäjä pystyy valita pelin eri kokoisilla ruudukoilla tai tu
 ## Jatkokehitysideoita 
 
 - Pelin ulkoasun personointi (ruudukon väri yms.)
-- Julkisessa internetissä oleva api tarjoaa tulokset, jotka sovellus hakee ja näyttää käynnistäessä paikallisesti
-    * Tulokset myös talletettaisiin verkon yli ja käyttäjät näkisivät muiden käyttäjien jakamat tulokset
