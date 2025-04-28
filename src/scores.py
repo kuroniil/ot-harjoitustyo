@@ -64,6 +64,8 @@ class Score:
     def add_new_score(self):
         """Adds a new score into the database using
            the intialization details"""
+        if not self._validate():
+            raise ValueError("Name must be 1-20 characters long")
         self._cursor.execute("""
             INSERT INTO scores (name, score, mode)
             VALUES (?, ?, ?);
@@ -73,3 +75,8 @@ class Score:
     def display(self):
         name_spaces = 23 - len(self.name)
         return f"{' ' * 11}{self.name}{name_spaces*' '}{self.score}"
+
+    def _validate(self):
+        if 0 < len(self.name) <= 20:
+            return True
+        return False

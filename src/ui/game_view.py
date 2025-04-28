@@ -168,11 +168,12 @@ class Game:
     def _handle_entry_submit(self):
         name = self._score_entry.get()
         if not self._score_submitted:
-            if self._scores.add_new_score(name, self._game._score, self._grid_size):
+            try:
+                self._scores.add_new_score(name, self._game._score, self._grid_size)
                 self._score_submitted = True
                 self._game_over_text.set("Tallennettu! Uusi peli -> Esc")
-            else:
-                self._game_over_text.set("Virhe tuloksen tallennuksessa")
+            except:
+                self._game_over_text.set("Nimen täytyy olla 1-20 merkkiä.")
 
     def _configure_cell_color(self):
         self._cell_colors = {
