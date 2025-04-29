@@ -50,7 +50,7 @@ poetry run invoke lint
 
 ## Release
 
-<a href=https://github.com/kuroniil/ot-harjoitustyo/releases/tag/viikko6>Sovelluksen uusin versio</a>
+<a href=https://github.com/kuroniil/ot-harjoitustyo/releases/tag/loppupalautus>Sovelluksen uusin versio</a>
 
 ## Dokumentaatio
 
@@ -63,3 +63,5 @@ poetry run invoke lint
 <a href=https://github.com/kuroniil/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md>Arkkitehtuuri</a>
 
 <a href=https://github.com/kuroniil/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md>Käyttöohje</a>
+
+<a href=https://github.com/kuroniil/ot-harjoitustyo/blob/master/dokumentaatio/testaus.md>Testaus</a>
